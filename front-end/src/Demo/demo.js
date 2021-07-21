@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+
+
+const theme = {
+    blue: {
+        default: "#3f51b5",
+        hover: "#283593"
+    },
+    pink: {
+        default: "#e91e63",
+        hover: "#ad1457"
+    }
+};
+
+const Span = styled.span`
+  background-color: ${(props) => theme[props.theme].default};
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: 0;
+  text-transform: uppercase;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+  &:hover {
+    background-color: ${(props) => theme[props.theme].hover};
+  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+`;
+
+Span.defaultProps = {
+    theme: "blue"
+};
+
+function clickMe() {
+    alert("You clicked me!");
+}
+
+const ButtonToggle = styled(Span)`
+    opacity: 0.7;
+    ${({ active }) =>
+            active &&
+            `
+        opacity: 1; 
+    `}
+    `;
+
+
+const values = [15,30,50, 100];
+
+function ToggleGroup() {
+    const [active, setActive] = useState(values[0]);
+    return (
+        <div>
+            {values.map((type) => (
+                <ButtonToggle active={active === type} onClick={() => setActive(type)}>
+                    {type}
+                </ButtonToggle>
+            ))}
+             <p> Your payment selection: {active} </p>
+        </div>
+        
+    );
+}
+
+export default function HIHI() {
+    return (
+        <div>
+            <ToggleGroup />
+        </div>
+    );
+}
+// {/*  */}
